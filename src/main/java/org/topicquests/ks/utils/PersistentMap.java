@@ -45,12 +45,11 @@ public class PersistentMap {
 			System.out.println("PS-0a "+f);
 			database = DBMaker.fileDB(f)
 					.closeOnJvmShutdown()
-					//.transactionDisable()  defaults to that
-					//.compressionEnable()
+					.checksumHeaderBypass()
 					.make();
 			map = database.hashMap(storeName)
 	        	.keySerializer(Serializer.STRING)
-	        	.valueSerializer(new SerializerCompressionWrapper(Serializer.STRING))
+	        	.valueSerializer(Serializer.STRING)
 	        	.createOrOpen();
 			isClosed = false;
 		} catch (Exception e) {
