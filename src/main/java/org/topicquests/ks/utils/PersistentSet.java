@@ -41,9 +41,7 @@ public class PersistentSet {
 			File f = new File(databasePath);
 			System.out.println("PS-0a "+f);
 			database = DBMaker.fileDB(f)
-					.closeOnJvmShutdown()
-					//.transactionDisable()  defaults to that
-					//.compressionEnable()
+					.checksumHeaderBypass()
 					.make();
 			System.out.println("PS-1 "+database);
 			treeSet = (NavigableSet<String>)database.treeSet(storeName).createOrOpen();
@@ -96,7 +94,6 @@ public class PersistentSet {
 		if (!isClosed) {
 			System.out.println("PersistentSet shutting down");
 			database.commit();
-			//database.compact();
 			database.close();
 			System.out.println("PersistentSet closed");
 			isClosed = true;

@@ -44,7 +44,6 @@ public class PersistentMap {
 			File f = new File(databasePath);
 			System.out.println("PS-0a "+f);
 			database = DBMaker.fileDB(f)
-					.closeOnJvmShutdown()
 					.checksumHeaderBypass()
 					.make();
 			map = database.hashMap(storeName)
@@ -121,7 +120,6 @@ public class PersistentMap {
 		if (!isClosed) {
 			System.out.println("PersistentMap shutting down");
 			database.commit();
-			//database.compact();
 			database.close();
 			System.out.println("PersistentMap closed");
 			isClosed = true;
