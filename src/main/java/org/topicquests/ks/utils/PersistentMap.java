@@ -16,6 +16,7 @@
 package org.topicquests.ks.utils;
 
 import java.io.File;
+import java.util.Set;
 
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
@@ -83,6 +84,10 @@ public class PersistentMap {
 	
 	public int size() {
 		return map.size();
+	}
+	
+	public Set<String> keys() {
+		return map.keySet();
 	}
 	
 	/**
